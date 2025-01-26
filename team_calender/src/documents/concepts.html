@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Big Calendar Concepts</title>
+</head>
+<body style="background-color: black;color: aliceblue;">
+    <header>
+        <h1>React Big Calendar Concepts I learnt</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>1. What does <code>withDragAndDrop()</code> do?</h2>
+            <p><code>withDragAndDrop</code> is a Higher-Order Component (HOC) provided by <code>react-big-calendar</code> to extend the default <code>Calendar</code> component with drag-and-drop and resize functionality.</p>
+            <ul>
+                <li><strong>Wraps the Calendar Component:</strong> Adds event handling for drag-and-drop and resizing.</li>
+                <li><strong>Handles Event Updates:</strong> Triggers callbacks like <code>onEventDrop</code> or <code>onEventResize</code> to handle updated event data.</li>
+                <li><strong>Enables Resizing and Dragging:</strong> Updates event start and end times based on the interaction.</li>
+                <li><strong>Integrates with Rendering Logic:</strong> Ensures visual updates to the calendar when events are moved or resized.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. How does Drag-and-Drop Work?</h2>
+            <p><strong>Core Concept:</strong> The HOC relies on native browser events to detect and handle drag-and-drop interactions, mapping event positions to the calendar grid.</p>
+            <ol>
+                <li><strong>Dragging Starts:</strong> Captures the initial event data and mouse position.</li>
+                <li><strong>Dragging Over the Calendar:</strong> Calculates the new time slot based on the mouse's position.</li>
+                <li><strong>Dropping the Event:</strong> Determines the final position and triggers the <code>onEventDrop</code> callback.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>3. How does Resizing Work?</h2>
+            <p><strong>Core Concept:</strong> Resizing adjusts an event's duration by dragging its start or end boundary.</p>
+            <ol>
+                <li><strong>Mouse Down:</strong> Detects resizing when clicking and dragging an event boundary.</li>
+                <li><strong>Dragging:</strong> Calculates the new duration based on the mouse's position.</li>
+                <li><strong>Mouse Up:</strong> Finalizes the duration and triggers the <code>onEventResize</code> callback.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>4. How does <code>react-big-calendar</code> Render Events?</h2>
+            <p><strong>Grid System:</strong> The calendar uses a time-based grid where rows represent time slots and columns represent days.</p>
+            <ul>
+                <li><strong>Start Time Mapping:</strong> Maps the event's start time to the corresponding row.</li>
+                <li><strong>Duration Mapping:</strong> Determines the number of rows spanned based on the event's duration.</li>
+                <li><strong>Styling:</strong> Positions and sizes events dynamically using CSS.</li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>5. State Management in Drag-and-Drop</h2>
+            <p><strong>How Events are Updated:</strong> The <code>onEventDrop</code> and <code>onEventResize</code> callbacks modify the <code>events</code> state, re-rendering the calendar.</p>
+            <ul>
+                <li><strong>Single Source of Truth:</strong> The <code>events</code> state reflects all changes.</li>
+                <li><strong>Immediate Updates:</strong> Any change to the <code>events</code> array is immediately reflected in the UI.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>6. Time Calculations (Moment.js)</h2>
+            <p><strong>How Dates and Times are Handled:</strong></p>
+            <ul>
+                <li><code>moment(slotInfo.start).format("YYYY-MM-DD"):</code> Formats a <code>Date</code> object into a string.</li>
+                <li><code>new Date(`${startDate}T${startTime}`):</code> Combines date and time into a single <code>Date</code> object.</li>
+            </ul>
+            <p><strong>Why Moment.js is Used:</strong> Simplifies date formatting and ensures consistency in time zone handling.</p>
+        </section>
+
+        <section>
+            <h2>7. Rendering Flow</h2>
+            <ol>
+                <li><strong>Initial Render:</strong> The calendar renders the grid and events from the <code>events</code> state.</li>
+                <li><strong>User Interaction:</strong> Clicking or dragging triggers updates to the state.</li>
+                <li><strong>State Updates:</strong> Changes to the <code>events</code> state cause the calendar to re-render with updated data.</li>
+            </ol>
+        </section>
+    </main>
+
+</body>
+</html>
